@@ -1,131 +1,189 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Alisson klk manito</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentino san</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  background: #faf7f8;
-  color: #333;
-}
+    <style>
+        body {
+            background-color: #000;
+            color: #ff4d4d;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
 
-.card {
-  background: white;
-  padding: 50px 40px;
-  border-radius: 18px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-  text-align: center;
-  max-width: 360px;
-}
+        h1 {
+            font-size: 2rem; 
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+            text-align: center;
+            font-weight: 700;
+            line-height: 1.3;
+        }
 
-h1 {
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 40px;
-}
+        .canvas-container {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+        }
 
-.buttons {
-  position: relative;
-  height: 120px;
-}
+        canvas {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #333;
+            background-color: #050505;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+            border-radius: 10px;
+        }
 
-button {
-  font-size: 16px;
-  padding: 12px 28px;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
 
-#yes {
-  background: #111;
-  color: white;
-}
+        label {
+            font-size: 1.5rem;
+            font-family: 'Courier New', monospace; 
+            font-weight: bold;
+        }
 
-#yes:hover {
-  transform: scale(1.05);
-}
+        input[type=range] {
+            width: 100%;
+            -webkit-appearance: none;
+            background: transparent;
+        }
 
-#no {
-  position: absolute;
-  background: #e5e5e5;
-  color: #666;
-  left: 140px;
-  top: 60px;
-}
-</style>
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #ff4d4d;
+            cursor: pointer;
+            margin-top: -9px;
+            box-shadow: 0 0 12px #ff4d4d;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #444;
+            border-radius: 2px;
+        }
+
+        .love-message {
+            font-size: 1.1rem;
+            color: #d4afaf;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
-  <h1>¿Me compras una papipollo de las que venden por la poli?</h1>
+    <h1>Aqui va a ir el nombre de la indicada, no me juzgues >:( <3</h1>
 
-  <div class="buttons">
-    <button id="yes">Sí</button>
-    <button id="no">No</button>
-  </div>
-</div>
-
-<script>
-const noBtn = document.getElementById("no");
-const container = document.querySelector(".buttons");
-
-function moveNoButton() {
-  const containerRect = container.getBoundingClientRect();
-  const btnRect = noBtn.getBoundingClientRect();
-
-  const maxX = containerRect.width - btnRect.width;
-  const maxY = containerRect.height - btnRect.height;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  noBtn.style.transition = "left 0.25s ease, top 0.25s ease";
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-}
-
-noBtn.addEventListener("mouseenter", moveNoButton);
-noBtn.addEventListener("mousemove", moveNoButton);
-
-document.getElementById("yes").addEventListener("click", () => {
-  document.body.innerHTML = `
-    <div style="
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:40px;
-      font-family:'Helvetica Neue', Arial, sans-serif;
-      background:#faf7f8;
-      color:#111;
-    ">
-      <div>
-        <p style="font-size:22px; line-height:1.6;">
-          Ya aceptaste el plan para la papipollo,
-        </p>
-        <p style="font-size:20px; line-height:1.6; margin-top:20px;">
-          miraaaaaaaaa,<br>
-          mi dedoooooo<br>
-          klk manito.
-        </p>
-        <p style="margin-top:30px; font-size:18px;">🤍</p>
-      </div>
+    <div class="canvas-container">
+        <canvas id="heartCanvas" width="500" height="500"></canvas>
     </div>
-  `;
-});
-</script>
 
+    <div class="controls">
+        <label id="kValueDisplay">k = 1.00</label>
+        <input type="range" id="kSlider" min="1" max="150" step="0.1" value="1">
+    </div>
+
+    <div class="love-message">
+        Si k es elemento de la relacion, quiero que recuerdes que k nunca será 0... adjunte su texto romantico aqui, voy a empezar a cobrar por hacer codigos pars el 14
+    </div>
+
+    <script>
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+        const kSlider = document.getElementById('kSlider');
+        const kDisplay = document.getElementById('kValueDisplay');
+
+        const scale = 120;
+        const canvasInternalWidth = canvas.width;
+        const canvasInternalHeight = canvas.height;
+        const centerX = canvasInternalWidth / 2;
+        const centerY = canvasInternalHeight / 2 + 50;
+
+        function drawAxes() {
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 1;
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvasInternalHeight);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(canvasInternalWidth, centerY);
+            ctx.stroke();
+        }
+
+        function drawHeart(k) {
+            ctx.clearRect(0, 0, canvasInternalWidth, canvasInternalHeight);
+            drawAxes();
+
+            ctx.beginPath();
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = '#ff4d4d';
+
+            const limit = Math.sqrt(3);
+            const step = 0.005;
+            let firstPoint = true;
+
+            for (let x = -limit; x <= limit; x += step) {
+                let term1 = Math.cbrt(x * x); 
+                let term2 = 0.9 * Math.sin(k * x) * Math.sqrt(3 - x * x);
+                let y = term1 + term2;
+
+                let plotX = centerX + (x * scale);
+                let plotY = centerY - (y * scale);
+
+                if (firstPoint) {
+                    ctx.moveTo(plotX, plotY);
+                    firstPoint = false;
+                } else {
+                    ctx.lineTo(plotX, plotY);
+                }
+            }
+            ctx.stroke();
+        }
+
+        let k = parseFloat(kSlider.value);
+        drawHeart(k);
+
+        kSlider.addEventListener('input', (e) => {
+            k = parseFloat(e.target.value);
+            kDisplay.textContent = `k = ${k.toFixed(2)}`;
+            drawHeart(k);
+        });
+    </script>
 </body>
 </html>
-
