@@ -9,13 +9,11 @@
 
     <style>
         :root {
-            /* --- MAGIA RESPONSIVA --- */
             --max-w: 45vw;
             --max-h: 80vh;
             --book-height: min(var(--max-h), calc(var(--max-w) * 1.414));
             --book-width: calc(var(--book-height) / 1.414);
             
-            /* --- PALETA DE COLORES --- */
             --gold: #d4af37;
             --dark-cover: #1a1a24;
             --parchment: #f4ebd0;
@@ -37,6 +35,7 @@
                 radial-gradient(circle at 20% 30%, rgba(180, 70, 255, 0.5) 0%, transparent 45%),
                 radial-gradient(circle at 80% 70%, rgba(255, 100, 255, 0.4) 0%, transparent 40%),
                 radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.9) 100%);
+            position: relative;
         }
 
         body::before {
@@ -47,6 +46,27 @@
                 5vw 5vh #fff, 15vw 10vh #fff, 25vw 2vh #eee, 35vw 8vh #fff, 45vw 1vh #fff, 
                 2vw 25vh #fff, 12vw 35vh #eee, 22vw 45vh #fff, 32vw 55vh #fff, 42vw 65vh #fff;
             z-index: -1; 
+        }
+
+        .sparkle {
+            position: absolute;
+            background-color: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 8px var(--gold), 0 0 12px var(--accent-color);
+            animation: sparkle-fade 0.8s ease-out forwards;
+        }
+
+        @keyframes sparkle-fade {
+            0% { 
+                transform: scale(1) translate(0, 0); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: scale(0) translate(var(--dx), var(--dy)); 
+                opacity: 0; 
+            }
         }
         
         .book {
@@ -61,7 +81,6 @@
             box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
         }
 
-        /* --- INTERIOR DERECHO --- */
         .static-page {
             position: absolute; width: 100%; height: 100%; 
             background: var(--pure-white); 
@@ -69,7 +88,6 @@
             overflow: hidden; 
         }
 
-        /* --- Flores de marca de agua --- */
         .watermark-flower {
             position: absolute;
             width: 45%; 
@@ -77,10 +95,12 @@
             z-index: 0; 
             pointer-events: none;
         }
+
         .flower-top-left {
             top: -5%; left: -10%;
             transform: rotate(-30deg);
         }
+
         .flower-bottom-right {
             bottom: -5%; right: -10%;
             transform: rotate(150deg);
@@ -113,7 +133,6 @@
             font-size: clamp(0.8rem, 2vw, 1.2rem);
         }
 
-        /* --- CARAS DE LA PÁGINA QUE GIRA --- */
         .folding-page {
             position: absolute; width: 100%; height: 100%;
             transform-origin: left center; transition: transform 0.8s ease;
@@ -127,7 +146,6 @@
             box-sizing: border-box; text-align: center;
         }
 
-        /* --- PORTADA --- */
         .front { 
             background: var(--light-page); 
             box-shadow: 5px 0px 15px rgba(0,0,0,0.15); 
@@ -144,7 +162,7 @@
         }
 
         .front-image {
-            width: 65%; max-width: 2000px; height: auto;
+            width: 65%; max-width: 200px; height: auto;
             margin: 20px 0 15px 0; object-fit: contain;
         }
 
@@ -152,13 +170,8 @@
             font-family: 'Cormorant Garamond', serif;
             color: var(--text-dark); 
             font-size: clamp(0.9rem, 1.8vw, 1.2rem);
-            font-style: italic; 
-            margin-top: 5px; 
-            opacity: 0.8; 
-            font-weight: 400;
-            /* AQUÍ ESTÁ EL AJUSTE: padding de 1cm (aprox 38px) a los lados */
-            padding: 0 1cm;
-            line-height: 1.3;
+            font-style: italic; margin-top: 5px; opacity: 0.8; font-weight: 400;
+            padding: 0 1cm; line-height: 1.3;
         }
 
         .front::after {
@@ -166,7 +179,6 @@
             width: 30px; height: 2px; background: var(--accent-color); opacity: 0.5;
         }
 
-        /* --- INTERIOR IZQUIERDO --- */
         .back { 
             background-color: var(--pure-white); 
             background-image: linear-gradient(to right, rgba(0,0,0,0.02) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.01) 100%);
@@ -178,8 +190,7 @@
         .message-container {
             width: 100%; height: 100%; display: flex; flex-direction: column;
             justify-content: flex-start; overflow-y: auto; padding-top: 5%;
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
         .message-container::-webkit-scrollbar { width: 0px; }
@@ -206,7 +217,6 @@
             box-shadow: -10px 0px 20px rgba(0,0,0,0.3); 
         }
 
-        /* --- ADAPTACIÓN PARA CELULARES --- */
         @media (max-width: 768px) {
             :root {
                 --max-w: 48vw; 
@@ -215,7 +225,6 @@
             .front-image {
                 width: 65%; margin: 15px 0 10px 0;
             }
-            /* En móviles muy estrechos, reducimos un poquito ese margen lateral para que el texto no quede tan apretado como una columna */
             .front-subtitle {
                 padding: 0 15px;
             }
@@ -227,7 +236,6 @@
     <div class="book" onclick="this.classList.toggle('open')">
         
         <div class="static-page">
-            
             <img src="floresm.png" class="watermark-flower flower-top-left" alt="">
             <img src="flores2.png" class="watermark-flower flower-bottom-right" alt="">
 
@@ -241,7 +249,6 @@
             <div class="frame-layer">
                 <img src="marco.png" class="mirror-frame" alt="Marco dorado">
             </div>
-
         </div>
 
         <div class="folding-page">
@@ -284,12 +291,38 @@
                 });
                 video.srcObject = stream;
             } catch (error) {
-                console.error("Error accediendo a la webcam:", error);
+                console.error(error);
                 video.style.display = 'none';
                 errorMessage.style.display = 'flex';
             }
         }
         window.addEventListener('load', startWebcam);
+
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.4) return;
+
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            
+            sparkle.style.left = (e.pageX + offsetX) + 'px';
+            sparkle.style.top = (e.pageY + offsetY) + 'px';
+            
+            const size = Math.random() * 3 + 2;
+            sparkle.style.width = size + 'px';
+            sparkle.style.height = size + 'px';
+
+            sparkle.style.setProperty('--dx', `${(Math.random() - 0.5) * 60}px`);
+            sparkle.style.setProperty('--dy', `${(Math.random() - 0.5) * 60}px`);
+
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 800);
+        });
     </script>
 
 </body>
