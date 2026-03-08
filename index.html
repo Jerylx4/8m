@@ -9,6 +9,7 @@
 
     <style>
         :root {
+            /* --- TAMAÑO BASE PARA ESCRITORIO --- */
             --max-w: 45vw;
             --max-h: 80vh;
             --book-height: min(var(--max-h), calc(var(--max-w) * 1.414));
@@ -58,8 +59,7 @@
         /* --- INTERIOR DERECHO (CÁMARA Y MARCO) --- */
         .static-page {
             position: absolute; width: 100%; height: 100%; 
-            background: #2a2a2a; 
-            border: none; box-sizing: border-box; z-index: 1;
+            background: #2a2a2a; border: none; box-sizing: border-box; z-index: 1;
             overflow: hidden; 
         }
 
@@ -117,8 +117,7 @@
             font-family: 'Cinzel', serif;
             color: var(--gold);
             font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-            letter-spacing: 2px;
-            margin: 0;
+            letter-spacing: 2px; margin: 0;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
             line-height: 1.2;
@@ -128,62 +127,86 @@
             font-family: 'Cormorant Garamond', serif;
             color: #ccc;
             font-size: clamp(1rem, 2vw, 1.3rem);
-            font-style: italic;
-            margin-top: 20px;
-            opacity: 0.9;
+            font-style: italic; margin-top: 20px; opacity: 0.9;
         }
 
         /* --- INTERIOR IZQUIERDO (EL MENSAJE) --- */
         .back { 
             background-color: var(--parchment); 
             background-image: linear-gradient(to right, rgba(0,0,0,0.1) 0%, transparent 5%, transparent 95%, rgba(0,0,0,0.05) 100%);
-            transform: rotateY(180deg); 
-            border-right: none; 
+            transform: rotateY(180deg); border-right: none; 
             box-shadow: inset -10px 0 20px rgba(0,0,0,0.1); 
-            padding: 8% 10%; /* Espacio optimizado para texto largo */
-            align-items: flex-start; /* Alinea el texto arriba */
+            padding: 8% 10%; 
+            align-items: flex-start; /* Permite que el texto empiece desde arriba */
         }
 
         .message-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow-y: auto; /* Por si lo abren en un móvil muy pequeño */
+            width: 100%; height: 100%;
+            display: block; /* Mejor para el scroll */
+            overflow-y: auto; 
+            padding-right: 8px; /* Espacio para que el scrollbar no pise el texto */
         }
 
-        /* Oculta la barra de scroll estética */
-        .message-container::-webkit-scrollbar { width: 0px; }
+        /* DISEÑO DE LA BARRA DE SCROLL (Para textos largos en celular) */
+        .message-container::-webkit-scrollbar { 
+            width: 4px; 
+        }
+        .message-container::-webkit-scrollbar-track { 
+            background: rgba(0,0,0,0.05); 
+            border-radius: 4px; 
+        }
+        .message-container::-webkit-scrollbar-thumb { 
+            background: rgba(212, 175, 55, 0.7); /* Dorado semitransparente */
+            border-radius: 4px; 
+        }
 
         .message-container p {
             font-family: 'Cormorant Garamond', serif;
             color: #2c2c2c;
-            font-size: clamp(0.75rem, 1.6vw, 1.15rem); /* Tamaño dinámico perfecto */
+            font-size: clamp(0.85rem, 1.6vw, 1.15rem);
             line-height: 1.4;
-            margin: 0 0 4% 0; /* Separación entre párrafos */
+            margin: 0 0 5% 0;
             text-align: justify;
         }
 
-        /* Destacando la parte del espejo */
         .message-container p:nth-child(4) {
-            font-weight: 600;
-            color: #4a2c69; /* Un tono morado sutil para hacer juego con el universo */
-            text-align: left;
+            font-weight: 600; color: #4a2c69; text-align: left;
         }
 
-        /* Destacando la frase final */
         .message-container p:last-child {
-            font-weight: 700;
-            text-align: center;
-            font-size: clamp(0.85rem, 1.8vw, 1.3rem);
-            margin-top: 2%;
-            color: #111;
+            font-weight: 700; text-align: center;
+            font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+            margin-top: 5%; color: #111;
         }
 
-        .book.open .folding-page { 
-            transform: rotateY(-180deg); 
-            box-shadow: -10px 0px 20px rgba(0,0,0,0.6); 
+        /* =========================================================
+           ADAPTACIÓN EXCLUSIVA PARA CELULARES (Móvil)
+           ========================================================= */
+        @media (max-width: 768px) {
+            :root {
+                /* Maximizamos la hoja para que abierta ocupe el 96% de la pantalla */
+                --max-w: 48vw; 
+                --max-h: 85vh; 
+            }
+            .back { 
+                padding: 6% 6%; /* Menos bordes en celular para ganar espacio */
+            }
+            .message-container p {
+                /* Fuente ajustada para pantallas muy estrechas (no baja de 11px) */
+                font-size: clamp(11px, 3.2vw, 14px); 
+                line-height: 1.35;
+                margin: 0 0 10px 0;
+                text-align: left; /* Evitamos justificar para no dejar huecos blancos raros */
+            }
+            .message-container p:last-child {
+                font-size: clamp(12px, 3.5vw, 15px);
+            }
+            .front-title {
+                font-size: clamp(1.2rem, 7vw, 2.5rem);
+            }
+            .front-subtitle {
+                font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+            }
         }
     </style>
 </head>
